@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Db\Database;
+
 //Instância de vagas
 class Vaga
 {
@@ -51,9 +53,15 @@ class Vaga
         $this->date = date('Y-m-d H:i:s');
 
         //CADASTRAR VAGA NO BANCO
+        $obDatabase = new Database('vagas');
+        $this->id = $obDatabase->insert([
+            'title' => $this->title,
+            'description' => $this->description,
+            'active' => $this->active,
+            'date' => $this->date,
+        ]);
 
-      //ATRIBUIR ID DA VAGA NA INSTÂNCIA
-
-      //RETORNAR SUCESSO
+        //RETORNAR SUCESSO
+        return true;
     }
 }

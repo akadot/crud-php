@@ -14,6 +14,10 @@ if (isset($_POST['title'], $_POST['description'], $_POST['active'])) {
     $obVaga->description = $_POST['description'];
     $obVaga->active = $_POST['active'];
     $obVaga->register(); //cadastra a vaga no banco
+
+    header('location: index.php?=status-success');
+
+    exit;
 }
 
 include __DIR__.'/includes/header.php';
