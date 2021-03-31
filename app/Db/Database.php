@@ -13,28 +13,28 @@ class Database
      *
      * @var string
      */
-    const HOST = 'localhost';
+    const HOST = '';
 
     /**
      * Nome do banco de dados.
      *
      * @var string
      */
-    const NAME = 'vagas_db';
+    const NAME = '';
 
     /**
      * Usuário do banco de dados.
      *
      * @var string
      */
-    const USER = 'root';
+    const USER = '';
 
     /**
      * Senha do banco de dados.
      *
      * @var string
      */
-    const PASS = 'Hqimom1123581321';
+    const PASS = '';
 
     /**
      * Nome da tabela do banco de dados.
