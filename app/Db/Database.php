@@ -107,6 +107,30 @@ class Database
     }
 
     /**
+     * Método responsável por executar uma consulta no banco.
+     *
+     * @param null|string $where
+     * @param null|string $order
+     * @param null|string $limit
+     * @param string      $fields
+     *
+     * @return PDOStatement
+     */
+    public function select($where = null, $order = null, $limit = null, $fields = '*')
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE '.$where : '';
+        $order = strlen($order) ? 'ORDER BY '.$order : '';
+        $limit = strlen($limit) ? 'LIMIT '.$limit : '';
+
+        //MONTANDO A QUERY
+        $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$where.' '.$order.' '.$limit;
+
+        //EXECUTA A QUERY
+        return $this->execute($query);
+    }
+
+    /**
      * Método responsável por criar uma conexão com o banco de dados.
      */
     private function setConnection()
