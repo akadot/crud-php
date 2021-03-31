@@ -67,6 +67,29 @@ class Vaga
     }
 
     /**
+     * Método para deletar uma vaga no banco
+     * @return boolean
+     */
+    public function delete()
+    {
+        return (new Database('vagas'))->delete('id = '. $this->id);
+    }
+
+    /**
+     * Método responsável por atualizar a vaga no banco
+     *
+     * @return boolean
+     */
+    public function update()
+    {
+        return (new Database('vagas'))->update('id = '.$this->id, [
+        'title' => $this->title,
+        'description' => $this->description,
+        'active' => $this->active,
+        'date' => $this->date,]);
+    }
+
+    /**
      * Método responsável por obert as vagas no banco de dados.
      *
      * @param null|string $where
@@ -79,5 +102,15 @@ class Vaga
     {
         return (new Database('vagas'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class)
         ;
+    }
+
+    /**
+     * Método responsável por buscar uma vaga.
+     *
+     * @param int $id
+     */
+    public static function getVaga($id)
+    {
+        return (new Database('vagas'))->select('id = '.$id)->fetchObject(self::class);
     }
 }

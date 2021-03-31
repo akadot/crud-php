@@ -1,5 +1,18 @@
 <?php
 
+$message = '';
+if (isset($_GET['status'])) {
+    switch ($_GET['status']) {
+    case 'success':
+      $message = '<div class="alert alert-success">Ação executada com sucesso!</div>';
+      break;
+    
+      case 'error':
+        $message = '<div class="alert alert-danger">Ação não executada!</div>';
+        break;
+  }
+}
+
 $results = '';
 foreach ($vagas as $vaga) {
     $results .= '<tr>
@@ -8,13 +21,20 @@ foreach ($vagas as $vaga) {
   <td>'.$vaga->description.'</td>
   <td>'.('s' == $vaga->active ? 'Ativo' : 'Inativo').'</td>
   <td>'.date('d/m/Y à\s H:i:s', strtotime($vaga->date)).'</td>
-  <td></td>
+  <td>
+    <a href="edit.php?id='.$vaga->id.'"><button type="button" class="btn btn-primary">Editar</button></a>
+    <a href="delete.php?id='.$vaga->id.'"><button type="button" class="btn btn-danger">Deletar</button></a>
+  </td>
   </tr>';
 }
+
+$results = strlen($results) ? $results : '<tr><td colspan="6" class="text-center">Nenhuma vaga encontrada.</td></tr>'
 
 ?>
 
 <main class="mt-3">
+
+  <?=$message?>
 
   <section>
     <a href="register.php">
@@ -35,7 +55,7 @@ foreach ($vagas as $vaga) {
         </tr>
       </thead>
       <tbody>
-        <?php echo $results; ?>
+        <?=$results ?>
       </tbody>
     </table>
   </section>

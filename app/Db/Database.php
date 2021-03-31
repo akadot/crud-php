@@ -131,6 +131,47 @@ class Database
     }
 
     /**
+     * Método responsável por atualizar os valores no banco de dados
+     *
+     * @var string $where
+     * @var array $values [field = value]
+     * @return boolean
+     */
+    public function update($where, $values)
+    {
+        //DADOS DA QUERY
+        $fields = array_keys($values);
+        
+        //MONTA A QUERY
+        $querry = 'UPDATE '.$this->table.' SET '.implode('=?,', $fields).'=? WHERE ' .$where;
+
+        //EXECUTA A QUERY
+        $this->execute($querry, array_values($values));
+
+        //RETORNA SUCESSO
+        return true;
+    }
+
+    /**
+     * Método responsável por deletar dados do banco
+     *
+     * @var string $where
+     *
+     * @return boolean
+     */
+    public function delete($where)
+    {
+        //MONTA A QUERY
+        $query = 'DELETE FROM '.$this->table.' WHERE '.$where;
+
+        //EXECUTA A QUERY
+        $this->execute($query);
+
+        //RETORNA SUCESSO
+        return true;
+    }
+
+    /**
      * Método responsável por criar uma conexão com o banco de dados.
      */
     private function setConnection()
